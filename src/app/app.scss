@@ -1,0 +1,104 @@
+.titulo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.formulario {
+  max-width: 400px;
+  margin: 0 auto 35px auto;
+  padding: 1.5rem;
+  border-radius: 10px;
+  background: #f9f9f9;
+  box-shadow: 0 4px 10px rgba(0,0,0,.1);
+
+  .campo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+
+    label {
+      font-weight: 600;
+      margin-bottom: .3rem;
+    }
+
+    input, select {
+      padding: .5rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+  }
+
+  button {
+    width: 100%;
+    padding: .6rem;
+    background: #1976d2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+
+    &:hover {
+      background: #125ca1;
+    }
+  }
+}
+
+.separacion {
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: red;
+}
+
+.recibo {
+  display: none;
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+
+  h2, h1, h3, .inf {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  .detalle {
+    text-align: start;
+  }
+
+  h1 {
+    margin-bottom: 1.5rem;
+  }
+
+  p {
+    font-size: 14px;
+    margin: .4rem 0;
+  }
+}
+
+/* SOLO IMPRESIÓN */
+@media print {
+
+  body * {
+    visibility: hidden;
+  }
+
+  .recibo, .recibo * {
+    visibility: visible;
+  }
+
+  .recibo {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    display: block;
+  }
+}
+
+@media print {
+  .no-imprimir {
+    display: none !important;
+  }
+}
