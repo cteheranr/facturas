@@ -71,6 +71,7 @@
     <br />
 
     <div class="detalle">
+      <p><strong>Fecha:</strong> {{ pagoImprimir.fecha | date:'MMM dd yyyy HH:mm:ss' }}</p>
       <p><strong>Estudiante:</strong> {{ pagoImprimir.estudiante }}</p>
       <p><strong>Concepto:</strong> {{ pagoImprimir.concepto }}</p>
       <p><strong>Valor:</strong> ${{ pagoImprimir.valor }}</p>
