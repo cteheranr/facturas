@@ -27,7 +27,7 @@ export class App implements OnInit {
     valorLetras: '',
     concepto: '',
     medio: '',
-    fecha: '',
+    fecha: new Date().toString(),
     referencia: '',
   };
 

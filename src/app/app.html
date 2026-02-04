@@ -71,48 +71,18 @@
     <br />
 
     <div class="detalle">
-      <p><strong>Fecha:</strong> {{ pagoImprimir.fecha | date:'MMM dd yyyy HH:mm:ss' }}</p>
+      <p><strong>Fecha:</strong> {{ pagoImprimir.fecha | date: 'MMM dd yyyy HH:mm:ss' }}</p>
       <p><strong>Estudiante:</strong> {{ pagoImprimir.estudiante }}</p>
       <p><strong>Concepto:</strong> {{ pagoImprimir.concepto }}</p>
       <p><strong>Valor:</strong> ${{ pagoImprimir.valor }}</p>
       <p><strong>Valor en letras:</strong> {{ pagoImprimir.valorLetras }} PESOS M/CTE</p>
       <p><strong>Medio de pago:</strong> {{ pagoImprimir.medio }}</p>
-      <p><strong>{{pago.medio === 'Transferencia' ? 'Número de comprobante' : 'Número de autorización'}}</strong> {{ pagoImprimir.referencia }}</p>
-    </div>
-
-    <br />
-    <br />
-
-    <p>______________________________</p>
-    <p>Firma</p>
-
-    <br />
-    <br />
-    <div class="separacion">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</div>
-    <br />
-    <br />
-
-    <h3>INSTITUTO EDUCATIVO</h3>
-    <h2>NUEVA AMERICA</h2>
-    <p class="inf">NIT: 800008061-8</p>
-    <p class="inf">Nuevo Bosque Mz 52 Lt 02 etapa 7</p>
-    <p class="inf">Cartagena, Bolívar.</p>
-    <p class="inf">Tel. 605 6654780</p>
-
-    <br />
-
-    <h3>RECIBO #{{ pagos.length - 1 }}</h3>
-
-    <br />
-
-    <div class="detalle">
-      <p><strong>Fecha:</strong> {{ pagoImprimir.fecha | date:'MMM dd yyyy HH:mm:ss' }}</p>
-      <p><strong>Estudiante:</strong> {{ pagoImprimir.estudiante }}</p>
-      <p><strong>Concepto:</strong> {{ pagoImprimir.concepto }}</p>
-      <p><strong>Valor:</strong> ${{ pagoImprimir.valor }}</p>
-      <p><strong>Valor en letras:</strong> {{ pagoImprimir.valorLetras }} PESOS M/CTE</p>
-      <p><strong>Medio de pago:</strong> {{ pagoImprimir.medio }}</p>
-      <p><strong>{{pago.medio === 'Transferencia' ? 'Número de comprobante' : 'Número de autorización'}}</strong> {{ pagoImprimir.referencia }}</p>
+      <p>
+        <strong>{{
+          pago.medio === 'Transferencia' ? 'Número de comprobante' : 'Número de autorización'
+        }}</strong>
+        {{ pagoImprimir.referencia }}
+      </p>
     </div>
 
     <br />
