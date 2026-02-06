@@ -1,7 +1,7 @@
 .titulo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .formulario {
@@ -10,7 +10,7 @@
   padding: 1.5rem;
   border-radius: 10px;
   background: #f9f9f9;
-  box-shadow: 0 4px 10px rgba(0,0,0,.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 
   .campo {
     display: flex;
@@ -19,11 +19,12 @@
 
     label {
       font-weight: 600;
-      margin-bottom: .3rem;
+      margin-bottom: 0.3rem;
     }
 
-    input, select {
-      padding: .5rem;
+    input,
+    select {
+      padding: 0.5rem;
       border-radius: 6px;
       border: 1px solid #ccc;
     }
@@ -31,25 +32,39 @@
 
   button {
     width: 100%;
-    padding: .6rem;
-    background: #1976d2;
+    padding: 0.6rem;
+    background: #118e32;
     color: white;
     border: none;
     border-radius: 6px;
     cursor: pointer;
 
     &:hover {
-      background: #125ca1;
+      background: #0c5821;
     }
+  }
+  .add {
+      background: #5790c5;
+  }
+  .add:hover {
+      background: #1c4164;
+  }
+
+  .delete {
+      background: #be2a2a;
+  }
+
+  .delete:hover {
+      background: #951414;
   }
 }
 
 .separacion {
-    width: 100vw;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    color: red;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: red;
 }
 
 .btns {
@@ -61,7 +76,10 @@
   // padding: 2rem;
   font-family: Arial, sans-serif;
 
-  h2, h1, h3, .inf {
+  h2,
+  h1,
+  h3,
+  .inf {
     text-align: center;
     margin: 0;
     padding: 0;
@@ -77,18 +95,18 @@
 
   p {
     font-size: 14px;
-    margin: .4rem 0;
+    margin: 0.4rem 0;
   }
 }
 
 /* SOLO IMPRESIÓN */
 @media print {
-
   body * {
     visibility: hidden;
   }
 
-  .recibo, .recibo * {
+  .recibo,
+  .recibo * {
     visibility: visible;
   }
 

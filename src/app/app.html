@@ -57,10 +57,10 @@
         </div>
       }
       @if ($index > 0) {
-        <button class="btns" (click)="eliminarMetodo($index)">Eliminar metodo de pago</button>
+        <button class="btns delete" (click)="eliminarMetodo($index)">Eliminar metodo de pago</button>
       }
     }
-    <button class="btns" (click)="agregarMetodo()">Agregar metodo de pago</button>
+    <button class="btns add" (click)="agregarMetodo()">Agregar metodo de pago</button>
 
     <button class="btns" (click)="guardarPago()">Generar Recibo</button>
   </form>
