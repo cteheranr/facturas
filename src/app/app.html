@@ -3,7 +3,7 @@
     <h1>RECIBO DE CAJA</h1>
   </div>
 
-  <form class="formulario" (ngSubmit)="guardarPago()">
+  <form class="formulario">
     <div class="campo">
       <label>Nombre del estudiante</label>
       <input type="text" [(ngModel)]="pago.estudiante" name="estudiante" required />
@@ -13,7 +13,7 @@
       <label>Valor</label>
       <input
         type="number"
-        [(ngModel)]="pago.valor"
+        [(ngModel)]="pago.valorTotal"
         name="valor"
         (input)="onValorChange()"
         required
@@ -30,26 +30,39 @@
       <input type="text" [(ngModel)]="pago.concepto" name="concepto" required />
     </div>
 
-    <div class="campo">
-      <label>Medio de pago</label>
-      <select [(ngModel)]="pago.medio" name="medio" required>
-        <option value="">Seleccione</option>
-        <option value="Efectivo">Efectivo</option>
-        <option value="Transferencia">Transferencia</option>
-        <option value="Datáfono">Datáfono</option>
-      </select>
-    </div>
-
-    @if (pago.medio === 'Transferencia' || pago.medio === 'Datáfono') {
+    @for (m of pago.metodosPago; track $index) {
       <div class="campo">
-        <label>{{
-          pago.medio === 'Transferencia' ? 'Número de comprobante' : 'Número de autorización'
-        }}</label>
-        <input type="text" [(ngModel)]="pago.referencia" name="referencia" required />
+        <label>Medio de pago</label>
+        <select [(ngModel)]="m.medio" name="medio" required>
+          <option value="">Seleccione</option>
+          <option value="Efectivo">Efectivo</option>
+          <option value="Transferencia">Transferencia</option>
+          <option value="Datáfono">Datáfono</option>
+        </select>
       </div>
-    }
 
-    <button type="submit">Generar Recibo</button>
+      @if (pago.metodosPago.length > 1) {
+        <div class="campo">
+          <label>Valor</label>
+          <input type="number" [(ngModel)]="m.valor" name="valor{{ $index }}" />
+        </div>
+      }
+
+      @if (m.medio === 'Transferencia' || m.medio === 'Datáfono') {
+        <div class="campo">
+          <label>{{
+            m.medio === 'Transferencia' ? 'Número de comprobante' : 'Número de autorización'
+          }}</label>
+          <input type="text" [(ngModel)]="m.referencia" name="referencia" required />
+        </div>
+      }
+      @if ($index > 0) {
+        <button class="btns" (click)="eliminarMetodo($index)">Eliminar metodo de pago</button>
+      }
+    }
+    <button class="btns" (click)="agregarMetodo()">Agregar metodo de pago</button>
+
+    <button class="btns" (click)="guardarPago()">Generar Recibo</button>
   </form>
 
   <hr />
@@ -74,15 +87,19 @@
       <p><strong>Fecha:</strong> {{ pagoImprimir.fecha | date: 'MMM dd yyyy HH:mm:ss' }}</p>
       <p><strong>Estudiante:</strong> {{ pagoImprimir.estudiante }}</p>
       <p><strong>Concepto:</strong> {{ pagoImprimir.concepto }}</p>
-      <p><strong>Valor:</strong> ${{ pagoImprimir.valor }}</p>
+      <p><strong>Valor:</strong> ${{ pagoImprimir.valorTotal }}</p>
       <p><strong>Valor en letras:</strong> {{ pagoImprimir.valorLetras }} PESOS M/CTE</p>
       <p><strong>Medio de pago:</strong> {{ pagoImprimir.medio }}</p>
-      <p>
-        <strong>{{
-          pago.medio === 'Transferencia' ? 'Número de comprobante' : 'Número de autorización'
-        }}</strong>
-        {{ pagoImprimir.referencia }}
-      </p>
+      @if (pagoImprimir.metodosPago.length > 1) {
+        @for (m of pagoImprimir.metodosPago; track $index) {
+          <p>
+            {{ m.medio }} - ${{ m.valor | number }}
+            @if (m.referencia) {
+              <span> (Ref: {{ m.referencia }}) </span>
+            }
+          </p>
+        }
+      }
     </div>
 
     <br />

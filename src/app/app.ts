@@ -11,22 +11,37 @@ import { FormsModule } from '@angular/forms';
 export class App implements OnInit {
   protected readonly title = signal('recibos');
   pagos: any[] = [];
+  valorInput: string = '';
+  valorNumero: number = 0;
   pago = {
     estudiante: '',
-    valor: 0,
+    valorTotal: 0,
     valorLetras: '',
     concepto: '',
-    medio: '',
+    metodosPago: [
+      {
+        medio: '',
+        valor: 0,
+        referencia: '',
+      },
+    ],
     fecha: new Date().toString(),
     referencia: '',
   };
+
   mostrarImpresion = false;
   pagoImprimir: any = {
     estudiante: '',
-    valor: 0,
+    valorTotal: 0,
     valorLetras: '',
     concepto: '',
-    medio: '',
+    metodosPago: [
+      {
+        medio: '',
+        valor: 0,
+        referencia: '',
+      },
+    ],
     fecha: new Date().toString(),
     referencia: '',
   };
@@ -41,17 +56,29 @@ export class App implements OnInit {
   }
 
   onValorChange() {
-    this.pago.valorLetras = this.numeroALetras(this.pago.valor);
+    this.pago.valorLetras = this.numeroALetras(this.pago.valorTotal);
   }
 
   guardarPago() {
     const nuevoPago = { ...this.pago };
+
+    if (this.pago.metodosPago.length > 1 && this.totalMetodos() !== this.pago.valorTotal) {
+      alert('La suma de los medios de pago no coincide con el total');
+      return;
+    }
 
     this.pagos.push(nuevoPago);
 
     localStorage.setItem('pagos', JSON.stringify(this.pagos));
 
     this.pagoImprimir = nuevoPago;
+
+    if (this.pagoImprimir.valorTotal && typeof this.pagoImprimir.valorTotal === 'number') {
+      this.pagoImprimir.valorTotal.toString();
+      const limpio = this.pagoImprimir.valorTotal.toString().replace(/\D/g, '');
+      this.pagoImprimir.valorTotal = limpio.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    }
+
     this.mostrarImpresion = true;
 
     setTimeout(() => {
@@ -60,10 +87,16 @@ export class App implements OnInit {
 
     this.pago = {
       estudiante: '',
-      valor: 0,
+      valorTotal: 0,
       valorLetras: '',
       concepto: '',
-      medio: '',
+      metodosPago: [
+        {
+          medio: '',
+          valor: 0,
+          referencia: '',
+        },
+      ],
       fecha: '',
       referencia: '',
     };
@@ -180,5 +213,21 @@ export class App implements OnInit {
     const textoMillones = millones === 1 ? 'UN MILLÓN' : this.numeroALetras(millones) + ' MILLONES';
 
     return textoMillones + (resto ? ' ' + this.numeroALetras(resto) : '');
+  }
+
+  agregarMetodo() {
+    this.pago.metodosPago.push({
+      medio: '',
+      valor: 0,
+      referencia: '',
+    });
+  }
+
+  eliminarMetodo(index: number) {
+    this.pago.metodosPago.splice(index, 1);
+  }
+
+  totalMetodos(): number {
+    return this.pago.metodosPago.reduce((sum, m) => sum + Number(m.valor || 0), 0);
   }
 }
