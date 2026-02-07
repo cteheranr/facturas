@@ -96,6 +96,12 @@
           <strong>Medio de pago:</strong>
           {{ pagoImprimir.metodosPago[0].medio }}
         </p>
+        @if (pagoImprimir.metodosPago[0].medio === 'Transferencia'){
+            <p><strong>Numero de comprobante: </strong> {{ pagoImprimir.metodosPago[0].referencia }}</p>
+          }
+          @if (pagoImprimir.metodosPago[0].medio === 'Datafono'){
+            <p><strong>Numero de aprobacion: </strong> {{ pagoImprimir.metodosPago[0].referencia }}</p>
+          }
       }
       @if (pagoImprimir.metodosPago.length > 1) {
         @for (m of pagoImprimir.metodosPago; track $index) {
