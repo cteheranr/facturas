@@ -57,7 +57,9 @@
         </div>
       }
       @if ($index > 0) {
-        <button class="btns delete" (click)="eliminarMetodo($index)">Eliminar metodo de pago</button>
+        <button class="btns delete" (click)="eliminarMetodo($index)">
+          Eliminar metodo de pago
+        </button>
       }
     }
     <button class="btns add" (click)="agregarMetodo()">Agregar metodo de pago</button>
@@ -89,9 +91,15 @@
       <p><strong>Concepto:</strong> {{ pagoImprimir.concepto }}</p>
       <p><strong>Valor:</strong> ${{ pagoImprimir.valorTotal }}</p>
       <p><strong>Valor en letras:</strong> {{ pagoImprimir.valorLetras }} PESOS M/CTE</p>
-      <p><strong>Medio de pago:</strong> {{ pagoImprimir.medio }}</p>
+      @if (pagoImprimir.metodosPago.length === 1) {
+        <p>
+          <strong>Medio de pago:</strong>
+          {{ pagoImprimir.metodosPago[0].medio }}
+        </p>
+      }
       @if (pagoImprimir.metodosPago.length > 1) {
         @for (m of pagoImprimir.metodosPago; track $index) {
+          <p><strong>Medio de pago:</strong></p>
           <p>
             {{ m.medio }} - ${{ m.valor | number }}
             @if (m.referencia) {

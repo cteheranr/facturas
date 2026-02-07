@@ -47,11 +47,10 @@ export class App implements OnInit {
   };
 
   ngOnInit(): void {
-    console.log(this.pagos);
     const data = localStorage.getItem('pagos');
+    console.log(this.pagoImprimir.metodosPago.length)
     if (data) {
       this.pagos = JSON.parse(data);
-      console.log(this.pagos);
     }
   }
 
@@ -104,7 +103,6 @@ export class App implements OnInit {
 
   refescarPages() {
     this.mostrarImpresion = false;
-    console.log(this.pagos);
   }
 
   numeroALetras(num: number): string {
