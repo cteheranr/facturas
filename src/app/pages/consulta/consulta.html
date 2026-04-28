@@ -1,0 +1,31 @@
+<div class="container mt-4">
+  <h2>Historial de Pagos</h2>
+
+  <div *ngIf="listaPagos.length === 0" class="alert alert-info">No hay pagos registrados.</div>
+  @if (listaPagos.length > 0) {
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Concepto</th>
+          <th>Monto</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (pago of listaPagos; track $index) {
+          <tr>
+            <td>{{ pago.fecha | date: 'shortDate' }}</td>
+            <td>{{ pago.concepto }}</td>
+            <td>{{ pago.valorTotal | currency }}</td>
+            <td>
+              <span class="badge" [ngClass]="pago.completado ? 'bg-success' : 'bg-warning'">
+                {{ pago.completado ? 'Pagado' : 'Pendiente' }}
+              </span>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>
