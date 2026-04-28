@@ -19,6 +19,7 @@ export class Consulta implements OnInit {
   obtenerPagos(): any[] {
     const pagosData = localStorage.getItem('pagos'); // Asumiendo que la llave es 'pagos'
     if (pagosData) {
+      console.log("Datos", pagosData)
       return JSON.parse(pagosData);
     }
     return [];
